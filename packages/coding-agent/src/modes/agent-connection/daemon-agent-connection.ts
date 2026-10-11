@@ -20,6 +20,7 @@ import type {
 import type { AcpMcpServerConfig } from "../../core/mcp/acp-mcp-types.js";
 import type { CustomMessage } from "../../core/messages.js";
 import type { RefinementResult } from "../../core/refinement/index.js";
+import type { SetRlmMaxDepthResult } from "../../core/rlm-max-depth.js";
 import type { DeleteSessionFileResult } from "../../core/session-file-actions.js";
 import { SessionAlreadyActiveError } from "../../core/session-lease.js";
 import type { SessionStats } from "../../core/session-stats.js";
@@ -1793,13 +1794,8 @@ export class DaemonAgentConnection implements AgentConnection {
 		});
 	}
 
-	async setRlmMaxDepth(maxDepth: number, options?: { global?: boolean }) {
-		return this.requestData<{
-			maxDepth: number;
-			source: "default" | "env" | "global" | "inherited" | "chat";
-			globalSaved: boolean;
-			globalError?: string;
-		}>({
+	async setRlmMaxDepth(maxDepth: number, options?: { global?: boolean }): Promise<SetRlmMaxDepthResult> {
+		return this.requestData<SetRlmMaxDepthResult>({
 			type: "set_rlm_max_depth",
 			activeSessionId: this.activeSessionId,
 			maxDepth,

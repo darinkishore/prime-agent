@@ -1,0 +1,1 @@
+- Fixed the exported daemon connection type for SDK callers using exact optional property types.
