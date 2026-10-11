@@ -1,0 +1,1 @@
+- Fixed kernel recovery truncating output files by skipping file handles in new checkpoints and rejecting their reconstruction in existing checkpoints.
